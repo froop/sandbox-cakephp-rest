@@ -9,10 +9,8 @@ Config
 
 ### application/app/config/routes.php
 
-* 末尾に追加
-	Router::parseExtensions('json');
+* 末尾に追加 `Router::parseExtensions('json');`
 
 ### application/app/config/database.php
 
-* $default の下記プロパティのコメント解除
-	'encoding' => 'utf8'
+* $default の `'encoding' => 'utf8'` コメント解除
