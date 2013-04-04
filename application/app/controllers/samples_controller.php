@@ -5,7 +5,11 @@ class SamplesController extends AppController {
 
 	function index() {
 		$output->sample = array(
-				array('key1' => 'value1', 'key2' => 123)
+			'key1' => 'value1',
+			'key2' => array(
+				array('key21' => 'value21', 'key22' => 21),
+				array('key21' => 'value22', 'key22' => 22)
+			)
 		);
 		$this->set('output', $output);
 	}
