@@ -1,7 +1,8 @@
 <?php
 class SamplesController extends AppController {
+	var $name = 'Samples';
+	var $uses = array("Sample");
 	var $components = array('RequestHandler');
-// 	var $uses = array();
 
 	function index() {
 		$output->sample = array(
