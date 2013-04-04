@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<project basedir="." default="database-all">
+	<property name="db.user" value="root" />
+	<property name="db.pass" value="root" />
+	<property name="db.host" value="localhost" />
+	<property name="db.port" value="3306" />
+	<property name="db.name" value="sample" />
+	<property name="db.charset" value="utf8" />
+
+	<property name="db.url" value="jdbc:mysql://${db.host}:${db.port}/" />
+	<property name="db.driver" value="com.mysql.jdbc.Driver" />
+	<property name="db.src.dir" value="src" />
+	<property name="db.ddl.dir" value="${db.src.dir}/ddl" />
+	<property name="db.dml.dir" value="${db.src.dir}/dml" />
+	<property name="db.data.dir" value="data" />
+	<property name="db.create.sql" value="${db.src.dir}/create-database.sql" />
+	<property name="db.lib.dir" value="lib" />
+
+	<path id="db.classpath">
+		<fileset dir="${db.lib.dir}" includes="mysql*.jar" />
+	</path>
+
+	<tstamp>
+		<format property="TSTAMP" pattern="yyyyMMddHHmmss" />
+	</tstamp>
+	<property name="export.file" value="${db.data.dir}/${db.name}_${TSTAMP}" />
+
+	<target name="database-all"
+		depends="export, create-db-tables, import, insert-master"
+		description="データベース全体作成(データexport/import)" />
+	<target name="create-db-tables" depends="create-database, create-tables"
+		description="データベース＆表作成(データ空)" />
+
+	<target name="create-database" description="データベースの作成">
+		<sql driver="${db.driver}" url="${db.url}"
+			userid="${db.user}" password="${db.pass}"
+			classpathref="db.classpath"
+			src="${db.create.sql}" />
+	</target>
+
+	<target name="create-tables" description="表の作成">
+		<antcall target="create-a-table">
+			<param name="sql.file" value="sample.sql"/>
+		</antcall>
+	</target>
+
+	<target name="insert-master" description="マスタの挿入">
+<!--
+		<antcall target="insert-a-table">
+			<param name="sql.file" value="insert-selection.sql"/>
+		</antcall>
+-->
+	</target>
+
+	<target name="create-a-table">
+		<antcall target="execute-sql">
+			<param name="sql.path" value="${db.ddl.dir}/${sql.file}"/>
+		</antcall>
+	</target>
+	<target name="insert-a-table">
+		<antcall target="execute-sql">
+			<param name="sql.path" value="${db.dml.dir}/${sql.file}"/>
+		</antcall>
+	</target>
+	<target name="execute-sql">
+		<sql driver="${db.driver}"
+			url="${db.url}${db.name}?characterEncoding=${db.charset}"
+			userid="${db.user}" password="${db.pass}"
+			classpathref="db.classpath"
+			src="${sql.path}" encoding="UTF-8" />
+	</target>
+
+	<target name="export" description="データの退避">
+		<mkdir dir="${db.data.dir}" />
+		<exec executable="mysqldump" output="${export.file}">
+			<arg value="--no-create-info" />
+			<arg value="--complete-insert" />
+			<arg value="--default-character-set=${db.charset}" />
+			<arg value="--host=${db.host}" />
+			<arg value="--port=${db.port}" />
+			<arg value="--user=${db.user}" />
+			<arg value="--password=${db.pass}" />
+			<arg value="${db.name}" />
+		</exec>
+	</target>
+
+	<target name="import" description="データの復元">
+		<exec executable="mysql" input="${export.file}">
+			<arg value="--default-character-set=${db.charset}" />
+			<arg value="--host=${db.host}" />
+			<arg value="--port=${db.port}" />
+			<arg value="--user=${db.user}" />
+			<arg value="--password=${db.pass}" />
+			<arg value="${db.name}" />
+		</exec>
+	</target>
+</project>
