@@ -5,7 +5,7 @@
 	<property name="db.pass" value="root" />
 	<property name="db.host" value="localhost" />
 	<property name="db.port" value="3306" />
-	<property name="db.name" value="sample" />
+	<property name="db.name" value="database_name" />
 	<property name="db.charset" value="utf8" />
 
 	<property name="db.url" value="jdbc:mysql://${db.host}:${db.port}/" />
