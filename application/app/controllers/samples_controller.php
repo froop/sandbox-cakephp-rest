@@ -10,7 +10,8 @@ class SamplesController extends AppController {
 			'key2' => array(
 				array('key21' => 'value21', 'key22' => 21),
 				array('key21' => 'value22', 'key22' => 22)
-			)
+			),
+			'key3' => $this->Sample->find('all')
 		);
 		$this->set('output', $output);
 	}

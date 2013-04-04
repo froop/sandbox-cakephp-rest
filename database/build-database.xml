@@ -46,11 +46,9 @@
 	</target>
 
 	<target name="insert-master" description="マスタの挿入">
-<!--
 		<antcall target="insert-a-table">
-			<param name="sql.file" value="insert-selection.sql"/>
+			<param name="sql.file" value="insert-sample.sql"/>
 		</antcall>
--->
 	</target>
 
 	<target name="create-a-table">
