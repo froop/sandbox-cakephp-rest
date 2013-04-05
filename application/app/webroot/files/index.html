@@ -29,7 +29,9 @@ $(function () {
 			var $item = $("<li>");
 
 			$("<a>").appendTo($item)
-					.attr("href", "../samples/" + this.Sample.id)
+					.attr("href", "input.html?" + $.param({
+						id : this.Sample.id
+					}))
 					.text(text);
 			$item.appendTo($("#list2"));
 		});
