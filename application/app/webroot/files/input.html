@@ -19,6 +19,8 @@
 <script src="../js/lib/purl.js"></script>
 <script>
 $(function () {
+	"use strict";
+	var HTTP_BAD_REQUEST = 400;
 	var id = $.url().param()["id"];
 
 	if (id) {
@@ -29,9 +31,22 @@ $(function () {
 
 	$("#form1").on("submit", function () {
 		var url = "../samples" + (id ? "/" + id : "");
-		$.post(url, $("#form1").serialize(), function (response) {
-			$("#message").html(response);
-			$("#back").show();
+		$.ajax(url, {
+			type : "POST",
+			data : $("#form1").serialize(),
+			success : function (responseText) {
+				$("#message").html(responseText);
+			},
+			error : function(xhr, textStatus, errorThrown) {
+				if (xhr.status === HTTP_BAD_REQUEST) {
+					$("#message").html(xhr.responseText);
+				} else {
+					alert(xhr.status + ":" + textStatus + ":" + errorThrown);
+				}
+			},
+			complete : function () {
+				$("#back").show();
+			}
 		});
 
 		// デフォルト動作抑止
