@@ -21,11 +21,11 @@ http://jquery.com/
 * application/app/webroot/js/lib/jquery.js
 
 
-### MySQL Connector/J 5.1 (テストDB作成用)
+### MySQL Connector/J (テストDB作成用)
 
 http://www-jp.mysql.com/downloads/connector/j/
 
-* database/lib/mysql-connector-java-5.1.*-bin.jar
+* database/lib/mysql-connector-java-*-bin.jar
 
 
 Config
@@ -35,8 +35,8 @@ Config
 
 * 末尾に追加
 
-	// 拡張子でリソースの種類を判断 (利用するにはURLの末尾に「.json」を付加)
-	Router::parseExtensions('json');
+    // 拡張子でリソースの種類を判断 (利用するにはURLの末尾に「.json」を付加)
+    Router::parseExtensions('json');
 
 ### application/app/config/database.php
 
