@@ -13,6 +13,7 @@
 </form>
 
 <div id="message"></div>
+<a id="back" href="./">back</a>
 
 <script src="../js/lib/jquery.js"></script>
 <script src="../js/lib/purl.js"></script>
@@ -29,12 +30,14 @@ $(function () {
 	$("#form1").on("submit", function () {
 		$.post("../samples/" + id, $("#form1").serialize(), function (response) {
 			$("#message").html(response);
-			location.href = "./";
+			$("#back").show();
 		});
 
 		// デフォルト動作抑止
 		return false;
 	});
+
+	$("#back").hide();
 });
 </script>
 
