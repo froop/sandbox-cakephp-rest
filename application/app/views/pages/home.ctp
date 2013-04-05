@@ -17,9 +17,12 @@ $(function () {
 		$.each(data.key3, function () {
 			var text = this.Sample.id + ":" + this.Sample.text1 +
 					":" + this.Sample.modified;
-			$("<li>")
-				.text(text)
-				.appendTo($("#list2"));
+			var $item = $("<li>");
+
+			$("<a>").appendTo($item)
+					.attr("href", "samples/" + this.Sample.id)
+					.text(text);
+			$item.appendTo($("#list2"));
 		});
 	});
 });
