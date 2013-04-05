@@ -42,6 +42,9 @@ Config
 
 * 末尾に追加
 
+    // RESTのデフォルトルールを使用
+    Router::mapResources('samples');
+    
     // 拡張子でリソースの種類を判断 (利用するにはURLの末尾に「.json」を付加)
     Router::parseExtensions('json');
 
