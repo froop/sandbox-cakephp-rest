@@ -28,7 +28,8 @@ $(function () {
 	}
 
 	$("#form1").on("submit", function () {
-		$.post("../samples/" + id, $("#form1").serialize(), function (response) {
+		var url = "../samples" + (id ? "/" + id : "");
+		$.post(url, $("#form1").serialize(), function (response) {
 			$("#message").html(response);
 			$("#back").show();
 		});
