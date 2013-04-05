@@ -7,17 +7,33 @@
 
 <body>
 
-<form>
+<form id="form1">
 	<input name="text1">
+	<input type="submit">
 </form>
+
+<div id="message"></div>
 
 <script src="../js/lib/jquery.js"></script>
 <script src="../js/lib/purl.js"></script>
 <script>
 $(function () {
 	var id = $.url().param()["id"];
-	$.getJSON("../samples/" + id + ".json", function (data) {
-		$("input[name=text1]").val(data.text1);
+
+	if (id) {
+		$.getJSON("../samples/" + id + ".json", function (data) {
+			$("input[name=text1]").val(data.text1);
+		});
+	}
+
+	$("#form1").on("submit", function () {
+		$.post("../samples/" + id, $("#form1").serialize(), function (response) {
+			$("#message").html(response);
+			location.href = "./";
+		});
+
+		// デフォルト動作抑止
+		return false;
 	});
 });
 </script>

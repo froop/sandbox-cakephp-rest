@@ -18,4 +18,14 @@ class SamplesController extends AppController {
 		$output = $result["Sample"];
 		$this->set('output', $output);
 	}
+
+	function edit($id) {
+		$this->Sample->id = $id;
+		if ($this->Sample->save($this->params['form'])) {
+			$output = 'Saved';
+		} else {
+			$output = 'Error';
+		}
+		$this->set('output', $output);
+	}
 }
