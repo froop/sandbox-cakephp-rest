@@ -10,8 +10,10 @@ Libraries
 
 https://github.com/cakephp/cakephp/zipball/1.3.15
 
-* application/app/config/*
-* application/cake/*
+* application/app/config
+* application/cake
+* application/plugins
+* application/vendors
 
 
 ### jQuery 1.9
@@ -21,7 +23,7 @@ http://jquery.com/
 * application/app/webroot/js/lib/jquery.js
 
 
-### JQuery URL Parser plugin
+### jQuery URL Parser plugin
 
 https://github.com/allmarkedup/jQuery-URL-Parser
 
