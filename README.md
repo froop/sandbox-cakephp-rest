@@ -21,6 +21,13 @@ http://jquery.com/
 * application/app/webroot/js/lib/jquery.js
 
 
+### JQuery URL Parser plugin
+
+https://github.com/allmarkedup/jQuery-URL-Parser
+
+* application/app/webroot/js/lib/purl.js
+
+
 ### MySQL Connector/J (テストDB作成用)
 
 http://www-jp.mysql.com/downloads/connector/j/
