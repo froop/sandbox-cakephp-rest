@@ -7,12 +7,18 @@
 
 <body>
 
-dummy
+<form>
+	<input name="text1">
+</form>
 
 <script src="../js/lib/jquery.js"></script>
+<script src="../js/lib/purl.js"></script>
 <script>
 $(function () {
-	//TODO
+	var id = $.url().param()["id"];
+	$.getJSON("../samples/" + id + ".json", function (data) {
+		$("input[name=text1]").val(data.text1);
+	});
 });
 </script>
 
