@@ -15,8 +15,10 @@ $(function () {
 		});
 
 		$.each(data.key3, function () {
+			var text = this.Sample.id + ":" + this.Sample.text1 +
+					":" + this.Sample.modified;
 			$("<li>")
-				.text(this.Sample.id + ":" + this.Sample.text1 + ":" + this.Sample.date1)
+				.text(text)
 				.appendTo($("#list2"));
 		});
 	});

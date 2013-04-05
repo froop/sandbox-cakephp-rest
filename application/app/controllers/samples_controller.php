@@ -11,7 +11,7 @@ class SamplesController extends AppController {
 						array('key21' => 'value21', 'key22' => 21),
 						array('key21' => '日本語22', 'key22' => 22)),
 				'key3' => $this->Sample->find('all', array(
-						'fields' => array('id', 'text1', 'date1', 'number1')))
+						'fields' => array('id', 'text1', 'modified')))
 		);
 		$this->set('output', $output);
 	}
