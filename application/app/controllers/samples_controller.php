@@ -12,4 +12,10 @@ class SamplesController extends AppController {
 		);
 		$this->set('output', $output);
 	}
+
+	function view($id) {
+		$result = $this->Sample->findById($id);
+		$output = $result["Sample"];
+		$this->set('output', $output);
+	}
 }
