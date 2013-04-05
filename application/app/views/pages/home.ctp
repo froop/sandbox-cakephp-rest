@@ -9,13 +9,13 @@ $(function () {
 		$("#id1").text(data.key1);
 
 		$.each(data.key2, function () {
-			$("<li></li>")
+			$("<li>")
 				.text(this.key22 + ":" + this.key21)
 				.appendTo($("#list1"));
 		});
 
 		$.each(data.key3, function () {
-			$("<li></li>")
+			$("<li>")
 				.text(this.Sample.id + ":" + this.Sample.text1 + ":" + this.Sample.date1)
 				.appendTo($("#list2"));
 		});
