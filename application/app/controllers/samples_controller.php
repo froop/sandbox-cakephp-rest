@@ -28,7 +28,7 @@ class SamplesController extends AppController {
 		$this->_save();
 	}
 
-	function _save() {
+	private function _save() {
 		if ($this->Sample->save($this->params['form'])) {
 			$output = 'Saved';
 		} else {
