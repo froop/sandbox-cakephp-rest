@@ -5,8 +5,17 @@ $(function () {
 	var id = $.url().param()["id"];
 
 	if (id) {
-		$.getJSON("../samples/" + id + ".json", function (data) {
-			$("input[name=text1]").val(data.text1);
+		$.ajax({
+			url : "../samples/" + id + ".json",
+			type : "GET",
+			dataType : "json",
+			success : function (data) {
+				$("input[name=text1]").val(data.text1);
+			},
+			error : function(xhr, textStatus, errorThrown) {
+				alert("[id=" + id + "]" + xhr.status + ":" + textStatus + ":"
+						+ errorThrown);
+			},
 		});
 	}
 
