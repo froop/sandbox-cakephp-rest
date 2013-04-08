@@ -6,21 +6,24 @@ $(function () {
 	var id = $.url().param()["id"];
 	var $message = $("#message");
 
+	function errorCallback(xhr, textStatus, errorThrown) {
+		if (xhr.status === HTTP_BAD_REQUEST) {
+			$message.text(xhr.responseText);
+		} else if (xhr.status === HTTP_NOT_FOUND) {
+			$message.text("ID is not found");
+		} else {
+			alert(xhr.status + ":" + textStatus + ":" + errorThrown);
+		}
+	}
+
 	if (id) {
 		$.ajax({
 			url : BASE_URL + "/" + id + ".json",
 			type : "GET",
 			dataType : "json",
+			error : errorCallback,
 			success : function (data) {
 				$("input[name=text1]").val(data.text1);
-			},
-			error : function(xhr, textStatus, errorThrown) {
-				if (xhr.status === HTTP_NOT_FOUND) {
-					$message.text("ID is not found");
-				} else {
-					alert("[id=" + id + "]" + xhr.status + ":" + textStatus
-							+ ":" + errorThrown);
-				}
 			},
 		});
 	}
@@ -29,17 +32,9 @@ $(function () {
 		$.ajax(BASE_URL + (id ? "/" + id : ""), {
 			type : "POST",
 			data : $("#form1").serialize(),
+			error : errorCallback,
 			success : function (responseText) {
 				$message.text(responseText);
-			},
-			error : function(xhr, textStatus, errorThrown) {
-				if (xhr.status === HTTP_BAD_REQUEST) {
-					$message.text(xhr.responseText);
-				} else if (xhr.status === HTTP_NOT_FOUND) {
-					$message.text("ID is not found");
-				} else {
-					alert(xhr.status + ":" + textStatus + ":" + errorThrown);
-				}
 			},
 			complete : function () {
 				$("#back").show();
