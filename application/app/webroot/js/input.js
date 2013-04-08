@@ -32,7 +32,7 @@ $(function () {
 			}
 		});
 
-		// デフォルト動作抑止
+		// prevent default
 		return false;
 	});
 
