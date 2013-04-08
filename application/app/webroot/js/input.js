@@ -7,13 +7,15 @@ $(function () {
 	var $message = $("#message");
 
 	function errorCallback(xhr, textStatus, errorThrown) {
+		var text;
 		if (xhr.status === HTTP_BAD_REQUEST) {
-			$message.text(xhr.responseText);
+			text = xhr.responseText;
 		} else if (xhr.status === HTTP_NOT_FOUND) {
-			$message.text("ID is not found");
+			text = "ID is not found";
 		} else {
-			alert(xhr.status + ":" + textStatus + ":" + errorThrown);
+			text = xhr.status + ":" + textStatus + ":" + errorThrown;
 		}
+		$message.text(text);
 	}
 
 	if (id) {
