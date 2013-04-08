@@ -16,12 +16,11 @@ class SamplesController extends AppController {
 	function view($id) {
 		$result = $this->Sample->findById($id);
 		if ($result) {
-			$output = $result['Sample'];
+			$this->_outputJson($result['Sample']);
 		} else {
 			$this->header('HTTP/1.1 404 Not Found');
-			$output = "";
+			$this->render('empty');
 		}
-		$this->_outputJson($output);
 	}
 
 	private function _outputJson($output) {
