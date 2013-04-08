@@ -18,8 +18,7 @@ class SamplesController extends AppController {
 		if ($result) {
 			$this->_outputJson($result['Sample']);
 		} else {
-			$this->header('HTTP/1.1 404 Not Found');
-			$this->render('empty');
+			$this->_errorNotFound();
 		}
 	}
 
@@ -56,5 +55,10 @@ class SamplesController extends AppController {
 		$this->header('HTTP/1.1 400 Bad Request');
 		$this->set('output', $message);
 		$this->render('message');
+	}
+
+	private function _errorNotFound() {
+		$this->header('HTTP/1.1 404 Not Found');
+		$this->render('empty');
 	}
 }
