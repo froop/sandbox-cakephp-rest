@@ -34,9 +34,7 @@ class SamplesController extends AppController {
 
 	function edit($id) {
 		if (!$this->Sample->findById($id)) {
-			$this->header('HTTP/1.1 400 Bad Request');
-			$this->set('output', '存在しないID');
-			$this->render('message');
+			$this->_responseErrorBadRequest('存在しないID');
 			return;
 		}
 		$this->Sample->id = $id;
@@ -52,6 +50,12 @@ class SamplesController extends AppController {
 			$output = $errors['text1'];
 		}
 		$this->set('output', $output);
+		$this->render('message');
+	}
+
+	private function _responseErrorBadRequest($message) {
+		$this->header('HTTP/1.1 400 Bad Request');
+		$this->set('output', $message);
 		$this->render('message');
 	}
 }
