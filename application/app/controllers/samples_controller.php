@@ -37,5 +37,6 @@ class SamplesController extends AppController {
 			$output = $errors['text1'];
 		}
 		$this->set('output', $output);
+		$this->render('message');
 	}
 }
