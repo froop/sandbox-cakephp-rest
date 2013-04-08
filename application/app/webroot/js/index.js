@@ -8,11 +8,11 @@ $(function () {
 			var text = this.Sample.modified + ":" + this.Sample.text1;
 			var $item = $("<li>");
 
-			$("<a>").appendTo($item)
-					.attr("href", "input.html?" + $.param({
+			$("<a>").attr("href", "input.html?" + $.param({
 						id : this.Sample.id
 					}))
-					.text(text);
+					.text(text)
+					.appendTo($item);
 			$item.appendTo($("#list1"));
 		});
 	});
