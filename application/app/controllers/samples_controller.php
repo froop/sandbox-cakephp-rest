@@ -45,9 +45,9 @@ class SamplesController extends AppController {
 		if ($this->Sample->save($this->params['form'])) {
 			$output = 'Saved';
 		} else {
-			$this->header('HTTP/1.1 400 Bad Request');
 			$errors = $this->Sample->invalidFields();
-			$output = $errors['text1'];
+			$this->_responseErrorBadRequest($errors['text1']);
+			return;
 		}
 		$this->set('output', $output);
 		$this->render('message');
