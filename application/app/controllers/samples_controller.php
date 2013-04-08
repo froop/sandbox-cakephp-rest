@@ -1,6 +1,5 @@
 <?php
 class SamplesController extends AppController {
-	public $name = 'Samples';
 	public $uses = array('Sample');
 	public $components = array('RequestHandler');
 
