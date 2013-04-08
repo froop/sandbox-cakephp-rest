@@ -35,11 +35,11 @@ $(function () {
 			type : "POST",
 			data : $("#form1").serialize(),
 			success : function (responseText) {
-				$("#message").html(responseText);
+				$("#message").text(responseText);
 			},
 			error : function(xhr, textStatus, errorThrown) {
 				if (xhr.status === HTTP_BAD_REQUEST) {
-					$("#message").html(xhr.responseText);
+					$("#message").text(xhr.responseText);
 				} else {
 					alert(xhr.status + ":" + textStatus + ":" + errorThrown);
 				}
