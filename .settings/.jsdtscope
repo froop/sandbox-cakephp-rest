@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="application/cake/" kind="src" path="">
+	<classpathentry excluding="application/app/webroot/js/lib/|application/cake/" kind="src" path="">
 		<attributes>
 			<attribute name="provider" value="org.eclipse.wst.jsdt.web.core.internal.project.ModuleSourcePathProvider"/>
 		</attributes>
