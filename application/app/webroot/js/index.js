@@ -5,11 +5,9 @@ $(function () {
 		$("#id1").text(data.key1);
 
 		$.each(data.list, function () {
-			var url = "input.html?" + $.param({ id : this.Sample.id });
-			var text = this.Sample.modified + ":" + this.Sample.text1;
 			var $link = $("<a>")
-					.attr("href", url)
-					.text(text);
+					.attr("href", "input.html?" + $.param({ id : this.Sample.id }))
+					.text(this.Sample.modified + ":" + this.Sample.text1);
 			$("#list1").append($("<li>").append($link));
 		});
 	});
