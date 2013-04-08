@@ -10,12 +10,16 @@ class SamplesController extends AppController {
 				'list' => $this->Sample->find('all', array(
 						'fields' => array('id', 'text1', 'modified')))
 		);
-		$this->set('output', $output);
+		$this->_outputJson($output);
 	}
 
 	function view($id) {
 		$result = $this->Sample->findById($id);
 		$output = $result["Sample"];
+		$this->_outputJson($output);
+	}
+
+	private function _outputJson($output) {
 		$this->set('output', $output);
 	}
 
