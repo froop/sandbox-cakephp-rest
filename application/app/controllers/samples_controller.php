@@ -1,7 +1,7 @@
 <?php
 class SamplesController extends AppController {
 	var $name = 'Samples';
-	var $uses = array("Sample");
+	var $uses = array('Sample');
 	var $components = array('RequestHandler');
 
 	function index() {
@@ -14,7 +14,7 @@ class SamplesController extends AppController {
 
 	function view($id) {
 		$result = $this->Sample->findById($id);
-		$this->_outputJson($result["Sample"]);
+		$this->_outputJson($result['Sample']);
 	}
 
 	private function _outputJson($output) {
