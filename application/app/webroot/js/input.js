@@ -12,17 +12,18 @@ $(function () {
 
 	$("#form1").on("submit", function () {
 		var url = "../samples" + (id ? "/" + id : "");
+		var $message = $("#message");
 		$.ajax(url, {
 			type : "POST",
 			data : $("#form1").serialize(),
 			success : function (responseText) {
-				$("#message").text(responseText);
+				$message.text(responseText);
 			},
 			error : function(xhr, textStatus, errorThrown) {
 				if (xhr.status === HTTP_BAD_REQUEST) {
-					$("#message").text(xhr.responseText);
+					$message.text(xhr.responseText);
 				} else if (xhr.status === HTTP_NOT_FOUND) {
-					$("#message").text("ID is not found");
+					$message.text("ID is not found");
 				} else {
 					alert(xhr.status + ":" + textStatus + ":" + errorThrown);
 				}
