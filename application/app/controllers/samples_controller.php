@@ -5,12 +5,11 @@ class SamplesController extends AppController {
 	var $components = array('RequestHandler');
 
 	function index() {
-		$output = array(
+		$this->_outputJson(array(
 				'key1' => 'value1',
 				'list' => $this->Sample->find('all', array(
 						'fields' => array('id', 'text1', 'modified')))
-		);
-		$this->_outputJson($output);
+		));
 	}
 
 	function view($id) {
