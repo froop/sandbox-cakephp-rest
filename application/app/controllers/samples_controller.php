@@ -34,7 +34,7 @@ class SamplesController extends AppController {
 
 	function edit($id) {
 		if (!$this->Sample->findById($id)) {
-			$this->_responseErrorBadRequest('存在しないID');
+			$this->_responseErrorBadRequest('ID is not exists');
 			return;
 		}
 		$this->Sample->id = $id;
