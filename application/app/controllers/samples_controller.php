@@ -33,7 +33,7 @@ class SamplesController extends AppController {
 
 	function edit($id) {
 		if (!$this->Sample->findById($id)) {
-			$this->_errorBadRequest('ID is not exists');
+			$this->_errorNotFound();
 			return;
 		}
 		$this->Sample->id = $id;
