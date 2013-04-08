@@ -33,6 +33,12 @@ class SamplesController extends AppController {
 	}
 
 	function edit($id) {
+		if (!$this->Sample->findById($id)) {
+			$this->header('HTTP/1.1 400 Bad Request');
+			$this->set('output', '存在しないID');
+			$this->render('message');
+			return;
+		}
 		$this->Sample->id = $id;
 		$this->_save();
 	}
