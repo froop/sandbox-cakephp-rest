@@ -42,14 +42,13 @@ class SamplesController extends AppController {
 	}
 
 	private function _save() {
-		if ($this->Sample->save($this->params['form'])) {
-			$output = 'Saved';
-		} else {
+		$success = $this->Sample->save($this->params['form']);
+		if (!$success) {
 			$errors = $this->Sample->invalidFields();
 			$this->_responseErrorBadRequest($errors['text1']);
 			return;
 		}
-		$this->set('output', $output);
+		$this->set('output', 'Saved');
 		$this->render('message');
 	}
 
