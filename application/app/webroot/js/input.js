@@ -1,12 +1,13 @@
 $(function () {
 	"use strict";
+	var BASE_URL = "../samples";
 	var HTTP_BAD_REQUEST = 400;
 	var HTTP_NOT_FOUND = 404;
 	var id = $.url().param()["id"];
 
 	if (id) {
 		$.ajax({
-			url : "../samples/" + id + ".json",
+			url : BASE_URL + "/" + id + ".json",
 			type : "GET",
 			dataType : "json",
 			success : function (data) {
@@ -21,7 +22,7 @@ $(function () {
 
 	$("#form1").on("submit", function () {
 		var $message = $("#message");
-		$.ajax("../samples" + (id ? "/" + id : ""), {
+		$.ajax(BASE_URL + (id ? "/" + id : ""), {
 			type : "POST",
 			data : $("#form1").serialize(),
 			success : function (responseText) {
