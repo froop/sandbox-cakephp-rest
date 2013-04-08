@@ -19,6 +19,7 @@ class SamplesController extends AppController {
 
 	private function _outputJson($output) {
 		$this->set('output', $output);
+		$this->render('json');
 	}
 
 	function add() {
