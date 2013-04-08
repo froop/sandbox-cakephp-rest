@@ -11,9 +11,8 @@ $(function () {
 	}
 
 	$("#form1").on("submit", function () {
-		var url = "../samples" + (id ? "/" + id : "");
 		var $message = $("#message");
-		$.ajax(url, {
+		$.ajax("../samples" + (id ? "/" + id : ""), {
 			type : "POST",
 			data : $("#form1").serialize(),
 			success : function (responseText) {
