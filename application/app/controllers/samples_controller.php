@@ -34,7 +34,7 @@ class SamplesController extends AppController {
 
 	function edit($id) {
 		if (!$this->Sample->findById($id)) {
-			$this->_responseErrorBadRequest('ID is not exists');
+			$this->_errorBadRequest('ID is not exists');
 			return;
 		}
 		$this->Sample->id = $id;
@@ -45,14 +45,14 @@ class SamplesController extends AppController {
 		$success = $this->Sample->save($this->params['form']);
 		if (!$success) {
 			$errors = $this->Sample->invalidFields();
-			$this->_responseErrorBadRequest($errors['text1']);
+			$this->_errorBadRequest($errors['text1']);
 			return;
 		}
 		$this->set('output', 'Saved');
 		$this->render('message');
 	}
 
-	private function _responseErrorBadRequest($message) {
+	private function _errorBadRequest($message) {
 		$this->header('HTTP/1.1 400 Bad Request');
 		$this->set('output', $message);
 		$this->render('message');
