@@ -1,8 +1,8 @@
 <?php
 class SamplesController extends AppController {
-	var $name = 'Samples';
-	var $uses = array('Sample');
-	var $components = array('RequestHandler');
+	public $name = 'Samples';
+	public $uses = array('Sample');
+	public $components = array('RequestHandler');
 
 	function index() {
 		$this->_outputJson(array(
