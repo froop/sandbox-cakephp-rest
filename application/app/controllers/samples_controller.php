@@ -15,11 +15,11 @@ class SamplesController extends AppController {
 
 	function view($id) {
 		$result = $this->Sample->findById($id);
-		if ($result) {
-			$this->_outputJson($result['Sample']);
-		} else {
+		if (!$result) {
 			$this->_errorNotFound();
+			return;
 		}
+		$this->_outputJson($result['Sample']);
 	}
 
 	private function _outputJson($output) {
