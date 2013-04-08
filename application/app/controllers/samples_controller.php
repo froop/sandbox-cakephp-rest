@@ -14,8 +14,7 @@ class SamplesController extends AppController {
 
 	function view($id) {
 		$result = $this->Sample->findById($id);
-		$output = $result["Sample"];
-		$this->_outputJson($output);
+		$this->_outputJson($result["Sample"]);
 	}
 
 	private function _outputJson($output) {
