@@ -8,7 +8,8 @@ class SamplesController extends AppController {
 		$this->_outputJson(array(
 				'key1' => 'value1',
 				'list' => $this->Sample->find('all', array(
-						'fields' => array('id', 'text1', 'modified')))
+						'fields' => array('id', 'text1', 'modified'),
+						'order' => array("modified DESC")))
 		));
 	}
 
