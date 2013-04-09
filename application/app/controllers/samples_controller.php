@@ -61,6 +61,10 @@ class SamplesController extends AppController {
 		$this->_save();
 	}
 
+
+	/**
+	 * Database INSERT or UPDATE.
+	 */
 	private function _save() {
 		$success = $this->Sample->save($this->params['form']);
 		if (!$success) {
