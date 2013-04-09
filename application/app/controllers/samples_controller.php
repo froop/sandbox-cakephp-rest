@@ -10,8 +10,14 @@ class SamplesController extends AppController {
 
 		$modified = $this->_getModified($list);
 		if ($modified) {
+			$beforeModified = $this->_getHeaderModified();
+			if ($beforeModified && $beforeModified >= $modified) {
+				$this->header('HTTP/1.1 304 Not Modified');
+				$this->render('empty');
+				return;
+			}
 			$this->header('Last-Modified: '
-					. $modified->format('D, d M Y H:i:s') . " GMT");
+					. $modified->format('D, d M Y H:i:s') . ' GMT');
 		}
 
 		$this->_outputJson(array(
@@ -27,6 +33,14 @@ class SamplesController extends AppController {
 		$modified = new DateTime($list[0]['Sample']['modified']);
 		$modified->setTimeZone(new DateTimeZone('GMT'));
 		return $modified;
+	}
+
+	private function _getHeaderModified() {
+		$requestHeaders = apache_request_headers();
+		if (!isset($requestHeaders["If-Modified-Since"])) {
+			return null;
+		}
+		return new DateTime($requestHeaders["If-Modified-Since"]);
 	}
 
 	function view($id) {
