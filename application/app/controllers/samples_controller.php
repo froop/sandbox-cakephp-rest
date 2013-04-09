@@ -4,12 +4,29 @@ class SamplesController extends AppController {
 	public $components = array('RequestHandler');
 
 	function index() {
+		$list = $this->Sample->find('all', array(
+				'fields' => array('id', 'text1', 'modified'),
+				'order' => array('modified DESC')));
+
+		$modified = $this->_getModified($list);
+		if ($modified) {
+			$this->header('Last-Modified: '
+					. $modified->format('D, d M Y H:i:s') . " GMT");
+		}
+
 		$this->_outputJson(array(
 				'key1' => 'value1',
-				'list' => $this->Sample->find('all', array(
-						'fields' => array('id', 'text1', 'modified'),
-						'order' => array('modified DESC')))
+				'list' => $list
 		));
+	}
+
+	private function _getModified($list) {
+		if (!isset($list[0])) {
+			return null;
+		}
+		$modified = new DateTime($list[0]['Sample']['modified']);
+		$modified->setTimeZone(new DateTimeZone('GMT'));
+		return $modified;
 	}
 
 	function view($id) {
