@@ -22,6 +22,11 @@ class SamplesController extends AppController {
 		));
 	}
 
+	/**
+	 * クライアントへの前回の応答後にデータに変更があったか確認.
+	 * @param array $list
+	 * @return boolean 変更ありなら true
+	 */
 	private function _checkModified(array $list) {
 		$dataModified = $this->_getDataModified($list);
 		if ($dataModified) {
@@ -36,6 +41,11 @@ class SamplesController extends AppController {
 		return true;
 	}
 
+	/**
+	 * 表示対象データの一番新しい更新日時を取得.
+	 * @param array $list
+	 * @return NULL|DateTime
+	 */
 	private function _getDataModified(array $list) {
 		if (!isset($list[0])) {
 			return null;
@@ -45,6 +55,10 @@ class SamplesController extends AppController {
 		return $modified;
 	}
 
+	/**
+	 * HTTP リクエストヘッダーの If-Modified-Since の日時を取得.
+	 * @return NULL|DateTime
+	 */
 	private function _getHeaderModified() {
 		$requestHeaders = apache_request_headers();
 		if (!isset($requestHeaders["If-Modified-Since"])) {
