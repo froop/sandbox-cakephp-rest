@@ -12,15 +12,8 @@ class SamplesController extends AppController {
 				'fields' => array('id', 'text1', 'modified'),
 				'order' => array('modified DESC')));
 
-		$dataModified = $this->_getDataModified($list);
-		if ($dataModified) {
-			$beforeModified = $this->_getHeaderModified();
-			if ($beforeModified && $beforeModified >= $dataModified) {
-				$this->_responseNotModified();
-				return;
-			}
-			$this->header('Last-Modified: '
-					. $dataModified->format('D, d M Y H:i:s') . ' GMT');
+		if (!$this->_checkModified($list)) {
+			return;
 		}
 
 		$this->_outputJson(array(
@@ -29,7 +22,21 @@ class SamplesController extends AppController {
 		));
 	}
 
-	private function _getDataModified($list) {
+	private function _checkModified(array $list) {
+		$dataModified = $this->_getDataModified($list);
+		if ($dataModified) {
+			$beforeModified = $this->_getHeaderModified();
+			if ($beforeModified && $beforeModified >= $dataModified) {
+				$this->_responseNotModified();
+				return false;
+			}
+			$this->header('Last-Modified: '
+					. $dataModified->format('D, d M Y H:i:s') . ' GMT');
+		}
+		return true;
+	}
+
+	private function _getDataModified(array $list) {
 		if (!isset($list[0])) {
 			return null;
 		}
