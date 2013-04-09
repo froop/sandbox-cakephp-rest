@@ -8,7 +8,7 @@ class SamplesController extends AppController {
 				'fields' => array('id', 'text1', 'modified'),
 				'order' => array('modified DESC')));
 
-		$modified = $this->_getModified($list);
+		$modified = $this->_getDataModified($list);
 		if ($modified) {
 			$beforeModified = $this->_getHeaderModified();
 			if ($beforeModified && $beforeModified >= $modified) {
@@ -26,7 +26,7 @@ class SamplesController extends AppController {
 		));
 	}
 
-	private function _getModified($list) {
+	private function _getDataModified($list) {
 		if (!isset($list[0])) {
 			return null;
 		}
