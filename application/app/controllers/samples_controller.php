@@ -12,8 +12,7 @@ class SamplesController extends AppController {
 		if ($dataModified) {
 			$beforeModified = $this->_getHeaderModified();
 			if ($beforeModified && $beforeModified >= $dataModified) {
-				$this->header('HTTP/1.1 304 Not Modified');
-				$this->render('empty');
+				$this->_responseNotModified();
 				return;
 			}
 			$this->header('Last-Modified: '
@@ -89,6 +88,11 @@ class SamplesController extends AppController {
 
 	private function _errorNotFound() {
 		$this->header('HTTP/1.1 404 Not Found');
+		$this->render('empty');
+	}
+
+	private function _responseNotModified() {
+		$this->header('HTTP/1.1 304 Not Modified');
 		$this->render('empty');
 	}
 }
