@@ -39,7 +39,7 @@ $(function () {
 				$message.text(responseText);
 			},
 			complete : function () {
-				$("#back").show();
+//				$("#back").show();
 			}
 		});
 
@@ -47,5 +47,5 @@ $(function () {
 		return false;
 	});
 
-	$("#back").hide();
+//	$("#back").hide();
 });
