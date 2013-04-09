@@ -45,7 +45,7 @@ class SamplesController extends AppController {
 	function view($id) {
 		$result = $this->Sample->findById($id);
 		if (!$result) {
-			$this->_errorNotFound();
+			$this->_responseNotFound();
 			return;
 		}
 		$this->_outputJson($result['Sample']);
@@ -62,7 +62,7 @@ class SamplesController extends AppController {
 
 	function edit($id) {
 		if (!$this->Sample->findById($id)) {
-			$this->_errorNotFound();
+			$this->_responseNotFound();
 			return;
 		}
 		$this->Sample->id = $id;
@@ -73,20 +73,20 @@ class SamplesController extends AppController {
 		$success = $this->Sample->save($this->params['form']);
 		if (!$success) {
 			$errors = $this->Sample->invalidFields();
-			$this->_errorBadRequest($errors['text1']);
+			$this->_responseBadRequest($errors['text1']);
 			return;
 		}
 		$this->set('output', 'Saved');
 		$this->render('message');
 	}
 
-	private function _errorBadRequest($message) {
+	private function _responseBadRequest($message) {
 		$this->header('HTTP/1.1 400 Bad Request');
 		$this->set('output', $message);
 		$this->render('message');
 	}
 
-	private function _errorNotFound() {
+	private function _responseNotFound() {
 		$this->header('HTTP/1.1 404 Not Found');
 		$this->render('empty');
 	}
