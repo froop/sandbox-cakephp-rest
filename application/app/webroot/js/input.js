@@ -1,6 +1,6 @@
 $(function () {
 	"use strict";
-	var BASE_URL = "../samples";
+	var BASE_URL = "../api/samples";
 	var HTTP_BAD_REQUEST = 400;
 	var HTTP_NOT_FOUND = 404;
 	var id = $.url().param()["id"];

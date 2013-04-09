@@ -1,7 +1,7 @@
 $(function () {
 	"use strict";
 
-	$.getJSON("../samples.json", function (data) {
+	$.getJSON("../api/samples.json", function (data) {
 		$("#id1").text(data.key1);
 
 		$.each(data.list, function () {
