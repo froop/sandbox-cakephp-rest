@@ -43,26 +43,25 @@ Config
 ### application/app/config/routes.php
 
     // REST API
-    Router::connect(
-        '/api/:controller',
-        array('action' => 'index', '[method]' => 'GET')
-    );
-    Router::connect(
-        '/api/:controller',
-        array('action' => 'add', '[method]' => 'POST')
-    );
-    Router::connect(
-        '/api/:controller/:id',
-        array('action' => 'view', '[method]' => 'GET'),
-        array('id' => '[0-9]+', 'pass' => array('id'))
-    );
-    Router::connect(
-        '/api/:controller/:id',
-        array('action' => 'edit', '[method]' => 'POST'),
-        array('id' => '[0-9]+', 'pass' => array('id'))
-    );
-    //// RESTのデフォルトルールを使用の場合は下記を指定
-    //Router::mapResources('samples');
+    Router::mapResources(array('samples'), array('prefix' => '/api/'));
+    //Router::connect(
+    //    '/api/:controller',
+    //    array('action' => 'index', '[method]' => 'GET')
+    //);
+    //Router::connect(
+    //    '/api/:controller',
+    //    array('action' => 'add', '[method]' => 'POST')
+    //);
+    //Router::connect(
+    //    '/api/:controller/:id',
+    //    array('action' => 'view', '[method]' => 'GET'),
+    //    array('id' => '[0-9]+', 'pass' => array('id'))
+    //);
+    //Router::connect(
+    //    '/api/:controller/:id',
+    //    array('action' => 'edit', '[method]' => 'POST'),
+    //    array('id' => '[0-9]+', 'pass' => array('id'))
+    //);
     
     // 拡張子でリソースの種類を判断 (利用するにはURLの末尾に「.json」を付加)
     Router::parseExtensions('json');
