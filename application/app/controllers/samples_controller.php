@@ -8,16 +8,16 @@ class SamplesController extends AppController {
 				'fields' => array('id', 'text1', 'modified'),
 				'order' => array('modified DESC')));
 
-		$modified = $this->_getDataModified($list);
-		if ($modified) {
+		$dataModified = $this->_getDataModified($list);
+		if ($dataModified) {
 			$beforeModified = $this->_getHeaderModified();
-			if ($beforeModified && $beforeModified >= $modified) {
+			if ($beforeModified && $beforeModified >= $dataModified) {
 				$this->header('HTTP/1.1 304 Not Modified');
 				$this->render('empty');
 				return;
 			}
 			$this->header('Last-Modified: '
-					. $modified->format('D, d M Y H:i:s') . ' GMT');
+					. $dataModified->format('D, d M Y H:i:s') . ' GMT');
 		}
 
 		$this->_outputJson(array(
