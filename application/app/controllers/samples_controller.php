@@ -3,6 +3,10 @@ class SamplesController extends AppController {
 	public $uses = array('Sample');
 	public $components = array('RequestHandler');
 
+	/**
+	 * 一覧データを JSON で取得.
+	 * GET /samples
+	 */
 	function index() {
 		$list = $this->Sample->find('all', array(
 				'fields' => array('id', 'text1', 'modified'),
@@ -42,6 +46,10 @@ class SamplesController extends AppController {
 		return new DateTime($requestHeaders["If-Modified-Since"]);
 	}
 
+	/**
+	 * 詳細データを JSON で取得.
+	 * GET /samples/:id
+	 */
 	function view($id) {
 		$result = $this->Sample->findById($id);
 		if (!$result) {
@@ -56,10 +64,18 @@ class SamplesController extends AppController {
 		$this->render('json');
 	}
 
+	/**
+	 * 詳細データを追加.
+	 * POST /samples
+	 */
 	function add() {
 		$this->_save();
 	}
 
+	/**
+	 * 詳細データを更新.
+	 * POST /samples/:id
+	 */
 	function edit($id) {
 		if (!$this->Sample->findById($id)) {
 			$this->_responseNotFound();
