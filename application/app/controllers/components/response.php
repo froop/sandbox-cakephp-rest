@@ -18,12 +18,12 @@ class ResponseComponent extends Object {
 
 	function setNotFound() {
 		$this->controller->header('HTTP/1.1 404 Not Found');
-		$this->setEmpty();
+		$this->setEmptyBody();
 	}
 
 	function setNotModified() {
 		$this->controller->header('HTTP/1.1 304 Not Modified');
-		$this->setEmpty();
+		$this->setEmptyBody();
 	}
 
 	function setMessageBody($output) {
@@ -31,7 +31,7 @@ class ResponseComponent extends Object {
 		$this->controller->render('/commons/message');
 	}
 
-	function setEmpty() {
+	function setEmptyBody() {
 		$this->controller->render('/commons/empty');
 	}
 }
