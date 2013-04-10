@@ -93,6 +93,10 @@ class SamplesController extends AppController {
 		$this->render('/commons/message');
 	}
 
+	private function _responseEmpty() {
+		$this->render('/commons/empty');
+	}
+
 	private function _responseBadRequest($message) {
 		$this->header('HTTP/1.1 400 Bad Request');
 		$this->_responseMessage($message);
@@ -100,11 +104,11 @@ class SamplesController extends AppController {
 
 	private function _responseNotFound() {
 		$this->header('HTTP/1.1 404 Not Found');
-		$this->render('/commons/empty');
+		$this->_responseEmpty();
 	}
 
 	private function _responseNotModified() {
 		$this->header('HTTP/1.1 304 Not Modified');
-		$this->render('/commons/empty');
+		$this->_responseEmpty();
 	}
 }
