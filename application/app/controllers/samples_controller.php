@@ -9,9 +9,8 @@ class SamplesController extends AppController {
 	 */
 	function index() {
 		$list = $this->Sample->sortByModified();
-		$modified = $this->_getDataModified($list);
 
-		if (!$this->LastModified->check($modified)) {
+		if (!$this->LastModified->check($this->_getDataModified($list))) {
 			$this->_responseNotModified();
 			return;
 		}
