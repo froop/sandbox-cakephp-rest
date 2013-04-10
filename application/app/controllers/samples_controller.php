@@ -85,7 +85,6 @@ class SamplesController extends AppController {
 			return null;
 		}
 		$modified = new DateTime($list[0]['Sample']['modified']);
-		$modified->setTimeZone(new DateTimeZone('GMT'));
 		return $modified;
 	}
 

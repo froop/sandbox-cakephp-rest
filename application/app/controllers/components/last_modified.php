@@ -11,9 +11,14 @@ class LastModifiedComponent extends Object {
 	 * @return boolean 変更ありなら true
 	 */
 	function check(DateTime $dataModified) {
+		function toGMT(DateTime $time) {
+			$res = clone $time;
+			$res->setTimeZone(new DateTimeZone('GMT'));
+			return $res;
+		}
+
 		if ($dataModified) {
-			$currentTime = clone $dataModified;
-			$currentTime->setTimeZone(new DateTimeZone('GMT'));
+			$currentTime = toGMT($dataModified);
 			$prevTime = $this->_getHeaderModified();
 			if ($prevTime && $prevTime >= $currentTime) {
 				return false;
