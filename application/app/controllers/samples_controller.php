@@ -66,8 +66,7 @@ class SamplesController extends AppController {
 			$this->_responseBadRequest($errors['text1']);
 			return;
 		}
-		$this->set('output', 'Saved');
-		$this->render('/commons/message');
+		_responseMessage('Saved');
 	}
 
 	/**
