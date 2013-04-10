@@ -15,7 +15,7 @@ class SamplesController extends AppController {
 			return;
 		}
 
-		$this->_outputJson(array(
+		$this->_responseJson(array(
 				'key1' => 'value1',
 				'list' => $list
 		));
@@ -31,7 +31,7 @@ class SamplesController extends AppController {
 			$this->_responseNotFound();
 			return;
 		}
-		$this->_outputJson($result['Sample']);
+		$this->_responseJson($result['Sample']);
 	}
 
 	/**
@@ -83,11 +83,11 @@ class SamplesController extends AppController {
 		return $modified;
 	}
 
-	private function _outputJson($output) {
+	private function _responseJson($output) {
 		$this->set('output', $output);
 		$this->render('/commons/json');
 	}
-	
+
 	private function _responseBadRequest($message) {
 		$this->header('HTTP/1.1 400 Bad Request');
 		$this->set('output', $message);
