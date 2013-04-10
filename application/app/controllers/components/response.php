@@ -21,6 +21,7 @@ class ResponseComponent extends Object {
 	}
 
 	function setJson($output) {
+		$this->controller->header('Content-type: application/json');
 		$this->controller->set('output', $output);
 		$this->controller->render('/commons/json');
 	}
