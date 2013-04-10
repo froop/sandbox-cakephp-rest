@@ -88,10 +88,14 @@ class SamplesController extends AppController {
 		$this->render('/commons/json');
 	}
 
+	private function _responseMessage($output) {
+		$this->set('output', $output);
+		$this->render('/commons/message');
+	}
+
 	private function _responseBadRequest($message) {
 		$this->header('HTTP/1.1 400 Bad Request');
-		$this->set('output', $message);
-		$this->render('/commons/message');
+		$this->_responseMessage($message);
 	}
 
 	private function _responseNotFound() {
