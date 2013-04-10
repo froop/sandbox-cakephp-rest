@@ -26,12 +26,12 @@ class ResponseComponent extends Object {
 		$this->setEmptyBody();
 	}
 
-	function setMessageBody($output) {
+	private function setMessageBody($output) {
 		$this->controller->set('output', $output);
 		$this->controller->render('/commons/message');
 	}
 
-	function setEmptyBody() {
+	private function setEmptyBody() {
 		$this->controller->render('/commons/empty');
 	}
 }
