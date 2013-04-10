@@ -1,7 +1,7 @@
 <?php
 class SamplesController extends AppController {
 	public $uses = array('Sample');
-	public $components = array('RequestHandler', 'LastModified');
+	public $components = array('RequestHandler', 'Response', 'LastModified');
 
 	/**
 	 * 一覧データを JSON で取得.
@@ -11,11 +11,11 @@ class SamplesController extends AppController {
 		$list = $this->Sample->sortByModified();
 
 		if (!$this->LastModified->check($this->_getDataModified($list))) {
-			$this->_responseNotModified();
+			$this->Response->setNotModified();
 			return;
 		}
 
-		$this->_responseJson(array(
+		$this->Response->setJson(array(
 				'key1' => 'value1',
 				'list' => $list
 		));
@@ -28,10 +28,10 @@ class SamplesController extends AppController {
 	function view($id) {
 		$result = $this->Sample->findById($id);
 		if (!$result) {
-			$this->_responseNotFound();
+			$this->Response->setNotFound();
 			return;
 		}
-		$this->_responseJson($result['Sample']);
+		$this->Response->setJson($result['Sample']);
 	}
 
 	/**
@@ -48,7 +48,7 @@ class SamplesController extends AppController {
 	 */
 	function edit($id) {
 		if (!$this->Sample->findById($id)) {
-			$this->_responseNotFound();
+			$this->Response->setNotFound();
 			return;
 		}
 		$this->Sample->id = $id;
@@ -63,7 +63,7 @@ class SamplesController extends AppController {
 		$success = $this->Sample->save($this->params['form']);
 		if (!$success) {
 			$errors = $this->Sample->invalidFields();
-			$this->_responseBadRequest($errors['text1']);
+			$this->Response->setBadRequest($errors['text1']);
 			return;
 		}
 		_responseEmpty();
@@ -80,34 +80,5 @@ class SamplesController extends AppController {
 		}
 		$modified = new DateTime($list[0]['Sample']['modified']);
 		return $modified;
-	}
-
-	private function _responseJson($output) {
-		$this->set('output', $output);
-		$this->render('/commons/json');
-	}
-
-	private function _responseMessage($output) {
-		$this->set('output', $output);
-		$this->render('/commons/message');
-	}
-
-	private function _responseEmpty() {
-		$this->render('/commons/empty');
-	}
-
-	private function _responseBadRequest($message) {
-		$this->header('HTTP/1.1 400 Bad Request');
-		$this->_responseMessage($message);
-	}
-
-	private function _responseNotFound() {
-		$this->header('HTTP/1.1 404 Not Found');
-		$this->_responseEmpty();
-	}
-
-	private function _responseNotModified() {
-		$this->header('HTTP/1.1 304 Not Modified');
-		$this->_responseEmpty();
 	}
 }
