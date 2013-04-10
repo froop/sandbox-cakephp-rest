@@ -36,7 +36,7 @@ class SamplesController extends AppController {
 
 	private function _outputJson($output) {
 		$this->set('output', $output);
-		$this->render('json');
+		$this->render('/commons/json');
 	}
 
 	/**
@@ -72,7 +72,7 @@ class SamplesController extends AppController {
 			return;
 		}
 		$this->set('output', 'Saved');
-		$this->render('message');
+		$this->render('/commons/message');
 	}
 
 	/**
@@ -91,16 +91,16 @@ class SamplesController extends AppController {
 	private function _responseBadRequest($message) {
 		$this->header('HTTP/1.1 400 Bad Request');
 		$this->set('output', $message);
-		$this->render('message');
+		$this->render('/commons/message');
 	}
 
 	private function _responseNotFound() {
 		$this->header('HTTP/1.1 404 Not Found');
-		$this->render('empty');
+		$this->render('/commons/empty');
 	}
 
 	private function _responseNotModified() {
 		$this->header('HTTP/1.1 304 Not Modified');
-		$this->render('empty');
+		$this->render('/commons/empty');
 	}
 }
