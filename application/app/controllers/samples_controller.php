@@ -34,11 +34,6 @@ class SamplesController extends AppController {
 		$this->_outputJson($result['Sample']);
 	}
 
-	private function _outputJson($output) {
-		$this->set('output', $output);
-		$this->render('/commons/json');
-	}
-
 	/**
 	 * 詳細データを追加.
 	 * POST /samples
@@ -88,6 +83,11 @@ class SamplesController extends AppController {
 		return $modified;
 	}
 
+	private function _outputJson($output) {
+		$this->set('output', $output);
+		$this->render('/commons/json');
+	}
+	
 	private function _responseBadRequest($message) {
 		$this->header('HTTP/1.1 400 Bad Request');
 		$this->set('output', $message);
