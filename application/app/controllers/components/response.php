@@ -13,7 +13,7 @@ class ResponseComponent extends Object {
 
 	function setBadRequest($message) {
 		$this->controller->header('HTTP/1.1 400 Bad Request');
-		$this->setMessage($message);
+		$this->setMessageBody($message);
 	}
 
 	function setNotFound() {
@@ -26,7 +26,7 @@ class ResponseComponent extends Object {
 		$this->setEmpty();
 	}
 
-	function setMessage($output) {
+	function setMessageBody($output) {
 		$this->controller->set('output', $output);
 		$this->controller->render('/commons/message');
 	}
