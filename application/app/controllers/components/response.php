@@ -5,6 +5,12 @@ class ResponseComponent extends Object {
 		$this->controller = $controller;
 	}
 
+	function setJson($output) {
+		$this->controller->header('Content-type: application/json');
+		$this->controller->set('output', $output);
+		$this->controller->render('/commons/json');
+	}
+
 	function setBadRequest($message) {
 		$this->controller->header('HTTP/1.1 400 Bad Request');
 		$this->setMessage($message);
@@ -18,12 +24,6 @@ class ResponseComponent extends Object {
 	function setNotModified() {
 		$this->controller->header('HTTP/1.1 304 Not Modified');
 		$this->setEmpty();
-	}
-
-	function setJson($output) {
-		$this->controller->header('Content-type: application/json');
-		$this->controller->set('output', $output);
-		$this->controller->render('/commons/json');
 	}
 
 	function setMessage($output) {
