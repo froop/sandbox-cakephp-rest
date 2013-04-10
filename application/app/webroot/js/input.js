@@ -36,7 +36,7 @@ $(function () {
 			data : $("#form1").serialize(),
 			error : errorCallback,
 			success : function (responseText) {
-				$message.text(responseText);
+				location.href = "./";
 			},
 			complete : function () {
 //				$("#back").show();
