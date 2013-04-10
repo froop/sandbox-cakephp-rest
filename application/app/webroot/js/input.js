@@ -38,14 +38,9 @@ $(function () {
 			success : function (responseText) {
 				location.href = "./";
 			},
-			complete : function () {
-//				$("#back").show();
-			}
 		});
 
 		// prevent default
 		return false;
 	});
-
-//	$("#back").hide();
 });
