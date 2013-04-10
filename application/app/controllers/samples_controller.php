@@ -8,9 +8,7 @@ class SamplesController extends AppController {
 	 * GET /samples
 	 */
 	function index() {
-		$list = $this->Sample->find('all', array(
-				'fields' => array('id', 'text1', 'modified'),
-				'order' => array('modified DESC')));
+		$list = $this->Sample->sortByModified();
 
 		if (!$this->_checkModified($list)) {
 			return;
