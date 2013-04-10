@@ -1,7 +1,7 @@
 <?php
 class SamplesController extends AppController {
 	public $uses = array('Sample');
-	public $components = array('RequestHandler');
+	public $components = array('RequestHandler', 'LastModified');
 
 	/**
 	 * 一覧データを JSON で取得.
@@ -9,8 +9,10 @@ class SamplesController extends AppController {
 	 */
 	function index() {
 		$list = $this->Sample->sortByModified();
+		$modified = $this->_getDataModified($list);
 
-		if (!$this->_checkModified($list)) {
+		if (!$this->LastModified->check($modified)) {
+			$this->_responseNotModified();
 			return;
 		}
 
@@ -75,25 +77,6 @@ class SamplesController extends AppController {
 	}
 
 	/**
-	 * クライアントへの前回の応答後にデータに変更があったか確認.
-	 * @param array $list
-	 * @return boolean 変更ありなら true
-	 */
-	private function _checkModified(array $list) {
-		$dataModified = $this->_getDataModified($list);
-		if ($dataModified) {
-			$beforeModified = $this->_getHeaderModified();
-			if ($beforeModified && $beforeModified >= $dataModified) {
-				$this->_responseNotModified();
-				return false;
-			}
-			$this->header('Last-Modified: '
-					. $dataModified->format('D, d M Y H:i:s') . ' GMT');
-		}
-		return true;
-	}
-
-	/**
 	 * 表示対象データの一番新しい更新日時を取得.
 	 * @param array $list
 	 * @return NULL|DateTime
@@ -105,18 +88,6 @@ class SamplesController extends AppController {
 		$modified = new DateTime($list[0]['Sample']['modified']);
 		$modified->setTimeZone(new DateTimeZone('GMT'));
 		return $modified;
-	}
-
-	/**
-	 * HTTP リクエストヘッダーの If-Modified-Since の日時を取得.
-	 * @return NULL|DateTime
-	 */
-	private function _getHeaderModified() {
-		$requestHeaders = apache_request_headers();
-		if (!isset($requestHeaders["If-Modified-Since"])) {
-			return null;
-		}
-		return new DateTime($requestHeaders["If-Modified-Since"]);
 	}
 
 	private function _responseBadRequest($message) {
