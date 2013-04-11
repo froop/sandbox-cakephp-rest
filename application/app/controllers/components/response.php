@@ -31,7 +31,7 @@ class ResponseComponent extends Object {
 		$this->controller->render('/commons/message');
 	}
 
-	private function setEmptyBody() {
+	function setEmptyBody() {
 		$this->controller->render('/commons/empty');
 	}
 }

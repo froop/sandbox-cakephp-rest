@@ -66,7 +66,7 @@ class SamplesController extends AppController {
 			$this->Response->setBadRequest($errors['text1']);
 			return;
 		}
-		_responseEmpty();
+		$this->Response->setEmptyBody();
 	}
 
 	/**
