@@ -1,3 +1,5 @@
+/*global $ */
+
 $(function () {
 	"use strict";
 
@@ -5,7 +7,7 @@ $(function () {
 		url : "../api/samples.json",
 		type : "GET",
 		dataType : "json",
-		beforeSend : function(xhr) {
+		beforeSend : function (xhr) {
 //			xhr.setRequestHeader("If-Modified-Since",
 //					"Thu, 01 Jun 1970 00:00:00 GMT");
 		},
