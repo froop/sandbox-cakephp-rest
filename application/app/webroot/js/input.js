@@ -1,9 +1,11 @@
+/*global location, $ */
+
 $(function () {
 	"use strict";
 	var BASE_URL = "../api/samples";
 	var HTTP_BAD_REQUEST = 400;
 	var HTTP_NOT_FOUND = 404;
-	var id = $.url().param()["id"];
+	var id = $.url().param().id;
 	var $message = $("#message");
 
 	function errorCallback(xhr, textStatus, errorThrown) {
@@ -26,7 +28,7 @@ $(function () {
 			error : errorCallback,
 			success : function (data) {
 				$("input[name=text1]").val(data.text1);
-			},
+			}
 		});
 	}
 
@@ -35,9 +37,9 @@ $(function () {
 			type : "POST",
 			data : $("#form1").serialize(),
 			error : errorCallback,
-			success : function (responseText) {
+			success : function () {
 				location.href = "./";
-			},
+			}
 		});
 
 		// prevent default
