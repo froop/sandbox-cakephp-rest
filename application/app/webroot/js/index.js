@@ -4,7 +4,7 @@ $(function () {
 	"use strict";
 
 	$.ajax({
-		url : "../api/samples.json",
+		url : "../api/samples",
 		type : "GET",
 		dataType : "json",
 		beforeSend : function (xhr) {

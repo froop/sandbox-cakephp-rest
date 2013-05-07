@@ -22,7 +22,7 @@ $(function () {
 
 	if (id) {
 		$.ajax({
-			url : BASE_URL + "/" + id + ".json",
+			url : BASE_URL + "/" + id,
 			type : "GET",
 			dataType : "json",
 			error : errorCallback,
